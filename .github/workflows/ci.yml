@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, tmp-ci-run]
   pull_request:
     branches: [main]
   merge_group:
@@ -117,7 +117,7 @@ jobs:
 
   native-aot-version:
     name: Compute Native AOT version
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: github.event_name == 'pull_request' || github.event_name == 'merge_group' || github.event_name == 'push'
     runs-on: ubuntu-latest
     outputs:
       value: ${{ steps.version.outputs.value }}
